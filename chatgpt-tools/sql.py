@@ -15,8 +15,11 @@ def list_tables():
 
 def run_sqlite_query(query):
     c = conn.cursor()
-    c.execute(query)
-    return c.fetchall()
+    try:
+        c.execute(query)
+        return c.fetchall()
+    except sqlite3.OperationalError as e:
+        return f"The following error occurred: {e}"
 
 
 class RunQueryArgsSchema(BaseModel):

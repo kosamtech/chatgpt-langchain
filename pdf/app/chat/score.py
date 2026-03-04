@@ -22,7 +22,7 @@ def random_component_by_score(component_type, component_map):
         score = int(values.get(name, 1))
         count = int(counts.get(name, 1))
         avg = score / count
-        avg_score[name] = avg
+        avg_score[name] = max(avg, 0.1)  # Ensure a minimum score to avoid zero probabilities
 
     # Do a weighted random selection
     sum_scores = sum(avg_score.values())
